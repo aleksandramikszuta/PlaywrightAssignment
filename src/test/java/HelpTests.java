@@ -12,6 +12,8 @@ public class HelpTests {
     private Page page;
     private HelpPage helpPage;
 
+    private HelpPageAsserts helpPageAsserts;
+
     @BeforeSuite
     public void initBrowser() {
         playwright = Playwright.create();
@@ -23,6 +25,7 @@ public class HelpTests {
         context = browser.newContext(new Browser.NewContextOptions().setBaseURL(HELP_URL));
         page = context.newPage();
         helpPage = new HelpPage(page);
+        helpPageAsserts = new HelpPageAsserts(page);
         page.navigate("");
     }
 
@@ -41,6 +44,7 @@ public class HelpTests {
     @Test
     public void searchForHelpTopicYieldsResult() {
         helpPage.searchForTerm("SPV");
+        helpPageAsserts.assertThatSearchResultsExist();
     }
 
 }

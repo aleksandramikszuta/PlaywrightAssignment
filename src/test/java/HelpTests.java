@@ -47,4 +47,10 @@ public class HelpTests {
         helpPageAsserts.assertThatSearchResultsExist();
     }
 
+    @Test
+    public void searchForInvalidTopicYieldsNoResult() {
+        helpPage.searchForTerm("qwertyyuio");
+        helpPageAsserts.assertThatSearchResultsDoNotExist();
+    }
+
 }

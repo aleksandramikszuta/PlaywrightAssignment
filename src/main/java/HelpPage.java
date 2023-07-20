@@ -11,7 +11,9 @@ public class HelpPage {
     protected static final String SYNDICATES = "syndicates-spvs";
     protected static final String FUNDS = "funds";
     protected static final String ANGEL_ROLL_UPS = "angel-roll-ups";
-    protected static final String SEARCH_RESULT = "div[class='flex w-full flex-col gap-3']";//"div[class='w-full']";
+    protected static final String SEARCH_RESULT_LIST = "div[class='flex w-full flex-col gap-3']";
+
+    protected static final String SEARCH_RESULT = "div[class='w-full']";
 
 
     private Locator getElementById (String id) {

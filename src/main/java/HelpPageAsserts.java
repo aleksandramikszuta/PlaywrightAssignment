@@ -12,4 +12,9 @@ public class HelpPageAsserts extends HelpPage {
         Assert.assertTrue(count > 0);
         return this;
     }
+    public HelpPageAsserts assertThatSearchResultsDoNotExist(){
+        assertThat(page.locator(SEARCH_RESULT_LIST)).hasCount(1);
+        assertThat(page.locator(SEARCH_RESULT)).hasCount(0);
+        return this;
+    }
 }

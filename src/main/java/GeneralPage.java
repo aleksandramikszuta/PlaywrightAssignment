@@ -4,4 +4,5 @@ public class GeneralPage extends HelpPage {
     public GeneralPage(Page page) {
         super(page);
     }
+
 }

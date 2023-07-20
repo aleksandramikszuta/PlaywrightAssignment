@@ -12,22 +12,17 @@ public class HelpPage {
     protected static final String FUNDS = "funds";
     protected static final String ANGEL_ROLL_UPS = "angel-roll-ups";
     protected static final String SEARCH_RESULT_LIST = "div[class='flex w-full flex-col gap-3']";
-
     protected static final String SEARCH_RESULT = "div[class='w-full']";
 
-
-    private Locator getElementById (String id) {
-        return page.locator("div[id=" + id + '"');
+    protected Locator getElementById (String id) {
+        return page.locator("div[id='" + id + "']");
     }
-
     public HelpPage(Page page) {
         this.page = page;
     }
-
     public void searchForTerm(String term) {
         page.locator(SEARCH_FIELD).locator("input").fill(term);
         page.locator(SEARCH_FIELD).locator("input").press("Enter");
-
     }
 
 public HelpPage goToGeneral() {
@@ -35,5 +30,13 @@ public HelpPage goToGeneral() {
             .click();
     return new GeneralPage(page);
 }
+protected Locator getListedArticleByTitle(String title) {
+        return page.locator("//div[contains(@class, 'flex')]/span[text()='" + title + "']");
+}
 
+public HelpPage goToListedArticle(String title){
+        getListedArticleByTitle(title)
+                .click();
+        return new ArticlePage(page);
+}
 }

@@ -13,6 +13,7 @@ public class HelpTests {
     private HelpPage helpPage;
 
     private HelpPageAsserts helpPageAsserts;
+    private ArticlePageAsserts articlePageAsserts;
 
     @BeforeSuite
     public void initBrowser() {
@@ -26,6 +27,7 @@ public class HelpTests {
         page = context.newPage();
         helpPage = new HelpPage(page);
         helpPageAsserts = new HelpPageAsserts(page);
+        articlePageAsserts = new ArticlePageAsserts(page);
         page.navigate("");
     }
 
@@ -43,14 +45,27 @@ public class HelpTests {
 
     @Test
     public void searchForHelpTopicYieldsResult() {
-        helpPage.searchForTerm("SPV");
-        helpPageAsserts.assertThatSearchResultsExist();
+        helpPage
+                .searchForTerm("SPV");
+        helpPageAsserts
+                .assertThatSearchResultsExist();
     }
 
     @Test
     public void searchForInvalidTopicYieldsNoResult() {
-        helpPage.searchForTerm("qwertyyuio");
-        helpPageAsserts.assertThatSearchResultsDoNotExist();
+        helpPage
+                .searchForTerm("qwertyuio");
+        helpPageAsserts
+                .assertThatSearchResultsDoNotExist();
     }
 
+    @Test
+    public void clickingArticleNavigatesToProperArticlePage(){
+        String title = "Why was bunch founded?";
+        helpPage
+                .goToGeneral()
+                .goToListedArticle(title);
+        articlePageAsserts
+                .assertThatTitleIsProper(title);
+    }
 }

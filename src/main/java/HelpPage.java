@@ -30,11 +30,17 @@ public HelpPage goToGeneral() {
             .click();
     return new GeneralPage(page);
 }
+
+public HelpPage goToFunds() {
+        getElementById(FUNDS)
+                .click();
+        return new FundsPage(page);
+}
 protected Locator getListedArticleByTitle(String title) {
         return page.locator("//div[contains(@class, 'flex')]/span[text()='" + title + "']");
 }
 
-public HelpPage goToListedArticle(String title){
+public ArticlePage goToListedArticle(String title){
         getListedArticleByTitle(title)
                 .click();
         return new ArticlePage(page);

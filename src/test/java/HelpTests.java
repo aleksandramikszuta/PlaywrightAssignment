@@ -15,13 +15,13 @@ public class HelpTests {
     private HelpPageAsserts helpPageAsserts;
     private ArticlePageAsserts articlePageAsserts;
 
-    @BeforeSuite
+    @BeforeClass
     public void initBrowser() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
     }
 
-    @BeforeTest
+    @BeforeMethod(alwaysRun = true)
     public void goToHelpPage() {
         context = browser.newContext(new Browser.NewContextOptions().setBaseURL(HELP_URL));
         page = context.newPage();
@@ -31,12 +31,12 @@ public class HelpTests {
         page.navigate("");
     }
 
-    @AfterTest
+    @AfterMethod(alwaysRun = true)
     public void closeContext() {
         context.close();
     }
 
-    @AfterSuite
+    @AfterClass
     public void closeBrowser()
     {
         browser.close();
@@ -67,5 +67,15 @@ public class HelpTests {
                 .goToListedArticle(title);
         articlePageAsserts
                 .assertThatTitleIsProper(title);
+    }
+
+    @Test
+    public void clickingNeutralFaceCausesProperAriaChecked(){
+        helpPage
+                .goToFunds()
+                .goToListedArticle("Are multiple closings possible?")
+                .giveNeutralRating();
+        articlePageAsserts
+                .assertThatOnlyNeutralFaceIsChecked();
     }
 }
